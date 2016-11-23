@@ -1,26 +1,23 @@
-/* jshint node: true */
+/* eslint no-var: 0, quotes: 0, func-names: 0, babel/object-shorthand: 0 */
+/* eslint-env node */
+
+const isCordova = require('./utils').isCordovaBuild;
 
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'plutus',
-    environment: environment,
+    environment,
+    isCordova,
     rootURL: '/',
     locationType: 'auto',
+    homeRoute: 'home',
     EmberENV: {
-      FEATURES: {
-        // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
-      },
+      FEATURES: {},
       EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
         Date: false
       }
     },
-
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
-    }
+    APP: {}
   };
 
   if (environment === 'development') {
@@ -29,22 +26,27 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV['ember-cli-mirage'] = {enabled: true};
   }
 
   if (environment === 'test') {
-    // Testem prefers this...
     ENV.locationType = 'none';
 
-    // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV['ember-cli-mirage'] = {enabled: true};
   }
 
   if (environment === 'production') {
-
+    ENV['ember-cli-mirage'] = {enabled: true};
   }
+
+  ENV['ember-simple-auth'] = {
+    authenticationRoute: 'login',
+    routeAfterAuthentication: ENV.homeRoute
+  };
 
   return ENV;
 };

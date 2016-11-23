@@ -1,13 +1,11 @@
 import Ember from 'ember';
-import Resolver from './resolver';
+import Resolver from 'plutus/resolver';
 import loadInitializers from 'ember-load-initializers';
-import config from './config/environment';
-
-let App;
+import config from 'plutus/config/environment';
 
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
-App = Ember.Application.extend({
+const App = Ember.Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
   Resolver

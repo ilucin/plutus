@@ -1,9 +1,9 @@
-import { module } from 'qunit';
-import Ember from 'ember';
-import startApp from '../helpers/start-app';
-import destroyApp from '../helpers/destroy-app';
+import RSVP from 'rsvp';
+import {module} from 'qunit';
+import startApp from 'plutus/tests/helpers/start-app';
+import destroyApp from 'plutus/tests/helpers/destroy-app';
 
-const { RSVP: { Promise } } = Ember;
+const {Promise} = RSVP;
 
 export default function(name, options = {}) {
   module(name, {
@@ -13,10 +13,12 @@ export default function(name, options = {}) {
       if (options.beforeEach) {
         return options.beforeEach.apply(this, arguments);
       }
+
+      return null;
     },
 
     afterEach() {
-      let afterEach = options.afterEach && options.afterEach.apply(this, arguments);
+      const afterEach = options.afterEach && options.afterEach.apply(this, arguments);
       return Promise.resolve(afterEach).then(() => destroyApp(this.application));
     }
   });

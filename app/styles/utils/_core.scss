@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  color: $color-text-dark;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea,
+body {
+  font-family: $font-dinn-next;
+}

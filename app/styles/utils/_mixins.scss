@@ -1,0 +1,70 @@
+@mixin ios-bouncy-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin optimized-scroll {
+  overflow: auto;
+  transform: translateZ(0);
+}
+
+@mixin will-change($prop...) {
+  transform: translate3d(0, 0, 0);
+
+  @supports (will-change: $prop) {
+    will-change: $prop;
+    transform: initial;
+  }
+}
+
+@mixin input-placeholder {
+  // scss-lint:disable VendorPrefix PseudoElement
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+@mixin stretch($top: auto, $right: auto, $bottom: auto, $left: auto, $position: absolute) {
+  position: $position;
+  @if $top {
+    top: $top;
+  }
+  @if $bottom {
+    bottom: $bottom;
+  }
+  @if $left {
+    left: $left;
+  }
+  @if $right {
+    right: $right;
+  }
+}
+
+@mixin disable-focus-glow {
+  -moz-appearance: none;
+
+  &:focus {
+    outline-color: transparent;
+    outline-style: none;
+    box-shadow: none;
+  }
+}
+
+@mixin touch-state {
+  @include mobile {
+    &.is-touch-active {
+      @content;
+    }
+  }
+}
